@@ -37,7 +37,7 @@ class PayloadParser
   end
 
   def create_order
-    {
+    { 
       "external_code": @payload["id"].to_s,
       "store_id": @payload["store_id"],
       "sub_total": @payload["total_amount"].to_s,
@@ -55,11 +55,10 @@ class PayloadParser
       "dt_order_create": @payload["date_created"],
       "postal_code": @payload["shipping"]["receiver_address"]["zip_code"],
       "number": @payload["shipping"]["receiver_address"]["street_number"],
-      "customer": create_customer,
-      "items": create_item,
-      "payment": create_payment
+      "customer_attributes": create_customer,
+      "items_attributes": create_item,
+      "payments_attributes": create_payment
+      
     }
   end
 end
-
-puts PayloadParser.new('payload.json').create_order
